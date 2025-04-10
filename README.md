@@ -1,6 +1,6 @@
 # 🚨 SentryCam-AWS
 
-**A real-time, low-latency vehicle detection pipeline for ATM surveillance, built using AWS Sagemaker, Lambda, Step Functions, S3, EventBridge, and SNS.**
+**A real-time, low-latency (<5 second inference time) vehicle detection pipeline for ATM surveillance, built using AWS Sagemaker, Lambda, Step Functions, S3, EventBridge, and SNS.**
 
 ---
 
@@ -8,7 +8,7 @@
 
 This project simulates an intelligent surveillance system for ATM locations. It uses real-time image classification to detect specific vehicle types and flag suspicious activity. If a high-risk vehicle is detected (e.g., motorcycle, pickup truck), the system raises an automated email alert.
 
-Using the CIFAR-100 dataset as a proxy, this project demonstrates the use of **AWS serverless architecture** to deliver an **end-to-end ML inference pipeline** triggered by an image upload.
+This project uses the CIFAR-100 dataset and uses the **AWS serverless architecture** to create and end-to-end inference pipeline, triggered by an image upload.
 
 > 💡 Can be explanded to different use cases, for example for smart city monitoring!
 
@@ -192,7 +192,7 @@ The image upload invokes the Step Function, and the Lambda serialise function ex
 
 ### 3. ✅ Step Function Execution Output
 
-After passing through the first two lambda function, the final one results in the output, the inference scores for each vehicle class, and after filtering, outputs if a suspicious vehicle is detected
+After passing through the first two lambda function, the final one results in the output, the inference scores for each vehicle class, and after filtering, outputs if a suspicious vehicle is detected. The execution time is also shown to be a little over 5 seconds!
 ![Step Function Output](images/state_machine_execution_output.png)
 
 ---
@@ -211,6 +211,7 @@ This confirms the successful automation of image-based vehicle detection and not
 ## ✨ “Future Work
 
 - Create a dashboard to visualise alerts over time and to allow users to upload their own images.
+- Optimise configuration to optimise cost and speed.
 - Replace the base model what a custom trained and hyperparameter-tuned CNN.
 - Add additional vehicle classes.
 - Use higher definition images to improve accuracy.
