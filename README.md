@@ -103,7 +103,7 @@ After training completes, the model is deployed to a real-time endpoint for infe
 
 4. **Create Three Lambda Functions** (located in `Lambda_functions/`):
 - `lambda_serialize`: Downloads the image from S3, base64-encodes it so it can be passed in json format between lambdas, and returns it along with metadata.
-- `lambda_classify`: Sends the image to the SageMaker endpoint and returns inference results for each vehicle class.
+- `lambda_classify`: Sends the image to the SageMaker endpoint and returns inference results for each vehicle class. **Ensure to update endpoint name**
 - `lambda_filter`: Decodes inference output, checks if confidence exceeds a defined threshold, and returns an alert if a suspicious vehicle is detected.
 
 **Required IAM Permissions:**
@@ -111,10 +111,10 @@ After training completes, the model is deployed to a real-time endpoint for infe
 - `lambda_classify`: `AmazonSageMakerFullAccess` to invoke the endpoint
 
 5. **Create the Step Function**  
-The state machine should:
-- Trigger each Lambda in sequence
-- Use `ResultSelector` to extract only relevant keys from each output
-- Pass a clean, flattened payload between steps
+- create a state machine using the lambda functions.
+    - The code for this is under `state_machine/state_machine_definition.json`
+    - Ensure the Lambda function ARN's are updated accordinly
+  
 
 ✅ Example payload to test the state machine:
 
@@ -122,7 +122,7 @@ The state machine should:
 {
   "image_data": "",
   "s3_bucket": "your-bucket-name",
-  "s3_key": "vehicle_data/test/bike_s_002009.png",
+  "s3_key": "path_to_test_image",
   "inferences": ""
 }
 ```
@@ -138,11 +138,11 @@ Create an EventBridge rule to watch the relevant S3 prefix:
   "detail-type": ["Object Created"],
   "detail": {
     "bucket": {
-      "name": ["bucket"]
+      "name": ["Your-bucket-name"]
     },
     "object": {
       "key": [{
-        "prefix": "path_to_image_folder"
+        "prefix": "path_to_image_folder/"
       }]
     }
   }
