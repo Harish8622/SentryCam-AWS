@@ -72,8 +72,8 @@ The **CIFAR-100** dataset was filtered to include the following vehicle classes,
 
 ### Installation
 
-`git clone https://github.com/YOUR_USERNAME/sentrycam-aws.git`
-`cd sentrycam-aws`
+`git clone https://github.com/Harish8622/SentryCam-AWS`
+`cd SentryCam-AWS`
 
 ### 🚀 Project Walkthrough
 
