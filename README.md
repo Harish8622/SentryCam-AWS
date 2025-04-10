@@ -36,7 +36,7 @@ This project uses the CIFAR-100 dataset and uses the **AWS serverless architectu
 4. ✅ Lambda 3 (filter): Applies confidence threshold, classifies vehicle type, and triggers notification if suspicious
 5. 📩 If flagged: SNS sends an email alert
 
-![Architecture Diagram](images/architecture_diagram.png)
+![Architecture Diagram](images/Architecture.png)
 
 
 ---
